@@ -5,6 +5,8 @@ import {map, takeUntil} from "rxjs/operators";
 import * as jQuery from 'jquery';
 import * as joint from 'jointjs';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {randomPlace} from "../core/utils/Utils";
+import {ToastService} from "../core/toast/toast.service";
 
 @Component({
   selector: 'app-call-graph',
@@ -17,7 +19,9 @@ export class CallGraphComponent implements OnInit {
   public loading: boolean = false;
   public formGroup: FormGroup;
 
-  constructor(private callGraphService: CallGraphService) {
+  constructor(private callGraphService: CallGraphService,
+              private toastService: ToastService
+  ) {
   }
 
   ngOnInit(): void {
@@ -29,33 +33,36 @@ export class CallGraphComponent implements OnInit {
   public callGraph() {
     if (this.formGroup.valid) {
       this.loading = true;
-      const dataMap = new Map();
       this.callGraphService.callGraph(this.formGroup.controls['projectPath'].value)
         .pipe(takeUntil(this.unsubscribe))
-        .pipe(
-          map(res => res.body))
-        .subscribe(value => {
-          Object.keys(value).forEach((key: Extract<keyof typeof value, string>) => {
-            const item = value[key]
-            const mapKey = Object.keys(item);
-            const mapValue = Object.values(item);
-            dataMap.set(mapKey[0], mapValue[0]);
-          })
-          this.constructGraph(dataMap);
-          this.loading = false;
-        });
+        .pipe(map(res => res.body))
+        .subscribe((value) => this.onSuccess(value), (error) => this.onFailed(error));
     }
   }
 
-  ngOnDestroy() {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
+  private onSuccess(value) {
+    const dataMap = new Map();
+    Object.keys(value).forEach((key: Extract<keyof typeof value, string>) => {
+      const item = value[key]
+      const mapKey = Object.keys(item);
+      const mapValue = Object.values(item);
+      dataMap.set(mapKey[0], mapValue[0]);
+    })
+    this.constructGraph(dataMap);
+    this.loading = false;
+  }
+
+
+  private onFailed(error) {
+    this.loading = false;
+    this.toastService.show(
+      'Incorrect project path'
+    )
   }
 
   private constructGraph(graphData) {
     const graph = this.initGraph();
     const m2 = new Map();
-
     for (const [k, v] of graphData.entries()) {
       let rect = null;
       let rect2 = null;
@@ -63,7 +70,7 @@ export class CallGraphComponent implements OnInit {
       if (!m2.get(k)) {
         console.log()
         rect = new joint.shapes.basic.Rect({
-          position: {x: this.randomPlace().x, y: this.randomPlace().y},
+          position: {x: randomPlace().x, y: randomPlace().y},
           size: {width: (k.length * 10) - 20, height: 40},
           attrs: {
             rect: {fill: '#424242', "stroke-width": '0'},
@@ -77,7 +84,7 @@ export class CallGraphComponent implements OnInit {
 
       if (!m2.get(v)) {
         rect2 = new joint.shapes.basic.Rect({
-          position: {x: this.randomPlace().x, y: this.randomPlace().y},
+          position: {x: randomPlace().x, y: randomPlace().y},
           size: {width: (v.length * 10) - 20, height: 30},
           attrs: {rect: {fill: '#424242', "stroke-width": '0'}, text: {text: v, fill: 'white'}}
         });
@@ -110,7 +117,9 @@ export class CallGraphComponent implements OnInit {
     return graph;
   }
 
-  private randomPlace() {
-    return {x: Math.floor(Math.random() * 800) + 1, y: Math.floor(Math.random() * 800) + 1}
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
+
 }

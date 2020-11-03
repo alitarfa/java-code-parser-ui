@@ -1,0 +1,27 @@
+:host {
+  mat-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+    mat-form-field {
+      width: 400px;
+    }
+
+    button {
+      margin: 8px;
+    }
+
+    ::ng-deep .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+  }
+}
+
+
+.canvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

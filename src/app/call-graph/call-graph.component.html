@@ -1,0 +1,17 @@
+<mat-card>
+  <form [formGroup]="formGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>Project Path</mat-label>
+      <input matInput placeholder="file path ...." formControlName="projectPath">
+      <mat-error></mat-error>
+    </mat-form-field>
+    <button [disabled]="loading" mat-mini-fab color="primary" (click)="callGraph()">
+      <mat-icon>speed</mat-icon>
+    </button>
+  </form>
+</mat-card>
+
+
+<div id="paper" class="canvas">
+  <mat-spinner *ngIf="loading" [strokeWidth]="4" [diameter]="40"></mat-spinner>
+</div>

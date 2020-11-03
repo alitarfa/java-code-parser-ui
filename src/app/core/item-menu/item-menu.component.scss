@@ -1,0 +1,25 @@
+.home-menu-item {
+  width: 244px;
+
+  &.mat-list-item {
+    color: #9b9ba0;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+
+      span {
+        margin-left: 12px;
+      }
+
+    }
+
+    &.active {
+      border-right: 4px solid #5878ea;
+      color: #5878ea;
+    }
+
+  }
+}

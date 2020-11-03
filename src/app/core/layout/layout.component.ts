@@ -12,6 +12,7 @@ export class LayoutComponent implements OnInit {
   public home = '../../assets/home-outline.svg';
   public graphCall = '../../assets/shuffle-2-outline.svg';
   public graphDependency = '../../assets/swap-outline.svg';
+  public isOpen = true;
 
   constructor() {
   }
@@ -19,4 +20,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onToggle() {
+    this.isOpen = !this.isOpen;
+  }
 }

@@ -1,6 +1,6 @@
 <!-- Top navbar -->
 <mat-toolbar class="navbar" color="primary">
-  <button mat-icon-button>
+  <button mat-icon-button (click)="onToggle()">
     <mat-icon>menu</mat-icon>
   </button>
   <span class="navbar-brand" matTooltip="Home">
@@ -12,11 +12,11 @@
 </mat-toolbar>
 
 <mat-drawer-container class="main">
-  <mat-drawer mode="side" opened>
+  <mat-drawer mode="side" [opened]="isOpen">
     <mat-nav-list>
       <app-item-menu [title]="'Dashboard'" [icon]="home" [link]="'/dashboard'"></app-item-menu>
       <app-item-menu [title]="'Call Graph'" [icon]="graphCall" [link]="'/call-graph'"></app-item-menu>
-      <app-item-menu [title]="'dependency Graph'" [icon]="graphDependency" [link]="'/dependency-graph'"></app-item-menu>
+      <app-item-menu [title]="'Dependency Graph'" [icon]="graphDependency" [link]="'/dependency-graph'"></app-item-menu>
       <app-item-menu [title]="'Statistics'" [icon]="statistics" [link]="'/statistics'"></app-item-menu>
       <app-item-menu [title]="'Setting'" [icon]="settings" [link]="'/settings'"></app-item-menu>
     </mat-nav-list>

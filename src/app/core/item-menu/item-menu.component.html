@@ -1,0 +1,10 @@
+<a mat-list-item class="home-menu-item"
+   [routerLink]="link"
+   [routerLinkActive]="!!link ? 'active' : ''"
+>
+  <div>
+    <img [src]="icon" width="24">
+    <span mat-line>{{title}}</span>
+  </div>
+</a>
+

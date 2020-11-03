@@ -61,9 +61,10 @@ export class CallGraphComponent implements OnInit {
       let rect2 = null;
 
       if (!m2.get(k)) {
+        console.log()
         rect = new joint.shapes.basic.Rect({
-          position: {x: 100, y: 30},
-          size: {width: 120, height: 40},
+          position: {x: this.randomPlace().x, y: this.randomPlace().y},
+          size: {width: (k.length * 10) - 20, height: 40},
           attrs: {
             rect: {fill: '#424242', "stroke-width": '0'},
             text: {text: k, fill: 'white'}
@@ -76,8 +77,8 @@ export class CallGraphComponent implements OnInit {
 
       if (!m2.get(v)) {
         rect2 = new joint.shapes.basic.Rect({
-          position: {x: 100, y: 30},
-          size: {width: 100, height: 30},
+          position: {x: this.randomPlace().x, y: this.randomPlace().y},
+          size: {width: (v.length * 10) - 20, height: 30},
           attrs: {rect: {fill: '#424242', "stroke-width": '0'}, text: {text: v, fill: 'white'}}
         });
         rect2.translate(300);
@@ -107,5 +108,9 @@ export class CallGraphComponent implements OnInit {
       gridSize: 1
     });
     return graph;
+  }
+
+  private randomPlace() {
+    return {x: Math.floor(Math.random() * 800) + 1, y: Math.floor(Math.random() * 800) + 1}
   }
 }

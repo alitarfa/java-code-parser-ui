@@ -68,7 +68,6 @@ export class CallGraphComponent implements OnInit {
       let rect2 = null;
 
       if (!m2.get(k)) {
-        console.log()
         rect = new joint.shapes.basic.Rect({
           position: {x: randomPlace().x, y: randomPlace().y},
           size: {width: (k.length * 10) - 20, height: 40},

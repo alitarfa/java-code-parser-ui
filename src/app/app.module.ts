@@ -50,6 +50,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { SettingsComponent } from './settings/settings.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatBadgeModule} from "@angular/material/badge";
+import { ParsingProjectComponent } from './parsing-project/parsing-project.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {MatBadgeModule} from "@angular/material/badge";
     DashboardComponent,
     DependencyGraphComponent,
     StatisticsComponent,
-    SettingsComponent
+    SettingsComponent,
+    ParsingProjectComponent
   ],
     imports: [
         BrowserModule,

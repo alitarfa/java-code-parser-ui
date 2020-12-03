@@ -1,0 +1,22 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper [disableRipple]="true">
+  <mat-step label="Init Project"
+            [completed]="steps?.init"
+            [editable]="true">
+    <mat-spinner [diameter]="'25'" *ngIf="!steps?.fin"></mat-spinner>
+  </mat-step>
+  <mat-step label="Parsing Dependencies"
+            [completed]="steps?.dep"
+            [editable]="true"></mat-step>
+  <mat-step label="Creating Packages"
+            [completed]="steps?.pack"
+            [editable]="true"></mat-step>
+  <mat-step label="Resolving Views"
+            [completed]="steps?.view"
+            [editable]="true"></mat-step>
+  <mat-step label="Finishing Project"
+            [completed]="steps?.fin"
+            [editable]="true"></mat-step>
+</mat-horizontal-stepper>
+
+
+

@@ -5,6 +5,7 @@ import {CallGraphComponent} from "./call-graph/call-graph.component";
 import {DependencyGraphComponent} from "./dependency-graph/dependency-graph.component";
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {SettingsComponent} from "./settings/settings.component";
+import {ParsingProjectComponent} from "./parsing-project/parsing-project.component";
 
 const routes: Routes = [
 
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: "dependency-graph",
         component: DependencyGraphComponent
+      },
+      {
+        path: "parsing-project",
+        component: ParsingProjectComponent
       },
       {
         path: "statistics",
